@@ -1,0 +1,16 @@
+{
+	"manifest_version": 2,
+	"name": "Waldo",
+	"version": "1.0",
+	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
+    "permissions": [
+        "https://api.idolondemand.com/"
+    ],
+    "background": {
+        "scripts": ["bower_components/angular/angular.min.js"]
+    },
+    "browser_action": {
+        "default_popup": "extension/index.html"
+    },
+    "content_security_policy": "script-src 'self'; object-src 'self'"
+}
