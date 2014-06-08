@@ -2,14 +2,19 @@ var app = angular.module('Waldo', []);
 
 app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLService) {
     $scope.test = "Hello World";
+    $scope.currentUrl = "";
+    chrome.tabs.getSelected(windowId, function(tab) {
+        console.log("current:"+tab.url);
+        $scope.currentUrl = tab.url;
+    });
 
     $scope.findSimilar = function() {
         var testURL = "http://automatic.com";
         var indexName =  "news_eng";
-        IDOLService.findSimilar(testURL, indexName);
+        IDOLService.findSimilar($scope.currentUrl, indexName);
 
         .success(function(res) {
-            console.log("Success: finding similar of URL " + testURL + " in index " + indexName + ". " );
+            console.log("Success: finding similar of URL " + $scope.currentUrl + " in index " + indexName + ". " );
             console.log(res);
         });
     };
@@ -26,10 +31,10 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLServi
 
     $scope.addIndex = function() {
         var indexName =  "news_eng";
-        IDOLService.addIndex(url, indexName);
+        IDOLService.addIndex($scope.currentUrl, indexName);
 
         .success(function(res) {
-            console.log("Success: connecting to Add to Text Index API : " + indexName + " with URL : " + url);
+            console.log("Success: connecting to Add to Text Index API : " + indexName + " with URL : " + $scope.currentUrl);
             console.log(res);
         });
     };
