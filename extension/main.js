@@ -106,14 +106,15 @@ function InjectSimilarStuff(results) {
     var documents = results.documents;
     var docList = "";
     function printDocs(element, index, array) {
-        docList = docList + '<a target="_top" href="' + element.reference + '">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
+        docList = docList + '<a target="_top" href="' + element.reference + '" style="font-size: 16px;">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
+        var kw = "<p style='font-size: 11px; margin-top: 3px;'>" ;
         function parseLinks(element2, index2, array2) {
-            docList = docList + element2.toLowerCase();
-            if (index2 < array2.length-1) docList = docList + ', ';
+            kw += element2.toLowerCase();
+            if (index2 < array2.length-1) kw += ', ';
         }
         var links = element.links;//.foreach(parseLinks);
         links.forEach(parseLinks);
-        docList = docList + '</br></br>';
+        docList += kw + "</p>" + '</br></br>';
     }
     documents.forEach(printDocs); //TODO: make this more conservative on parse api calls
 
@@ -132,5 +133,5 @@ text-decoration: none;\
 font-family:Arial,"Times New Roman",Georgia,Serif;\
 }\
   </style>                \
-      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:large;">Waldo</div>';
+      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:30px; color: white;">WALDO</div>';
 }
