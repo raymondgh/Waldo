@@ -1,5 +1,13 @@
 var app = angular.module('Waldo', []);
 
+var pageuri = '';
+chrome.runtime.onMessage.addListener(
+  function (request, sender, sendResponse) {
+      pageuri = request.uri;
+      chrome.extension.getBackgroundPage().location.reload();
+      sendResponse({ uri: pageuri });
+  });
+
 app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function($scope, IDOLService, ChromeService) {
     $scope.test = "Hello World";
     $scope.currentUrl = "";
@@ -89,7 +97,7 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
 
     chrome.tabs.getSelected(null, function(tab) {
         // $scope.$apply(function() {
-            $scope.currentUrl = tab.url;
+    $scope.currentUrl = tab.url; //pageuri;
 
         // });
           

@@ -23,6 +23,12 @@ var textIndexKey = 'news_eng';
 //    });
 //}
 
+//console.log(window.location.href);
+chrome.runtime.sendMessage({ uri: window.location.href }, function (response) {
+    //console.log(response.farewell);
+    console.log(response.uri);
+});
+
 //height of top bar, or width in your case
 var height = '100%';
 
@@ -75,12 +81,12 @@ html.append(
 }\
   </style>                \
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>\
-<div id="sidebarExpander"  onclick="$(\'#waldoSidebar\').width() ? $(\'#waldoSidebar\').css(\'width\', \'0px\') : $(\'#waldoSidebar\').css(\'width\', \'20%\');$(\'#waldoSidebar\').width() ? $(\'#sidebarExpander\').css(\'width\', \'22%\') : $(\'#sidebarExpander\').css(\'width\', \'20px\');" style="background-color:#009DDC;position: fixed; width: 22%;border:none;z-index: 2147483647; top: 0px;' +
+<div id="sidebarExpander"  onclick="$(\'#waldoSidebar\').width() ? $(\'#waldoSidebar\').css(\'width\', \'0px\') : $(\'#waldoSidebar\').css(\'width\', \'20%\');$(\'#waldoSidebar\').width() ? $(\'#sidebarExpander\').css(\'width\', \'22%\') : $(\'#sidebarExpander\').css(\'width\', \'20px\');localStorage.waldoSidebar = $(\'#waldoSidebar\').width();" style="background-color:#009DDC;position: fixed; width: 22%;border:none;z-index: 2147483647; top: 0px;' +
            'height: ' + height + ';right: 0px;filter:alpha(opacity=50);opacity: 0.50;"></div>\
-\
+<script>localStorage.waldoSidebar != 0 ? $(\'#waldoSidebar\').css(\'width\', \'20%\') : $(\'#waldoSidebar\').css(\'width\', \'0px\');localStorage.waldoSidebar != 0 ? $(\'#sidebarExpander\').css(\'width\', \'22%\') : $(\'#sidebarExpander\').css(\'width\', \'20px\');</script>\
   <iframe id="' + iframeId + '" scrolling="no" frameborder="0" allowtransparency="true" ' +
     'style="background-color:#009DDC;position: fixed; width: 20%;border:none;z-index: 2147483647; top: 0px;' +
-           'height: ' + height + ';right: 0px;filter:alpha(opacity=50);opacity: 0.50;">' +
+           'height: ' + height + ';right: 0px;filter:alpha(opacity=80);opacity: 0.8;">' +
   '</iframe>'
 );
 
@@ -91,9 +97,7 @@ document.getElementById(iframeId).contentDocument.body.innerHTML =
       width: 100%;        \
       z-index: 2147483647;\
     }                     \
-  </style>                \
-      Page Title\
-      <p>Page Snippet</p>';
+  </style>';
 
 var similarStuff = {};
 
@@ -128,6 +132,5 @@ text-decoration: none;\
 font-family:Arial,"Times New Roman",Georgia,Serif;\
 }\
   </style>                \
-<div></div>\
-      ' + docList + '';
+      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:large;">Waldo</div>';
 }
