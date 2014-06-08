@@ -4,7 +4,8 @@
 	"version": "1.0",
 	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
     "permissions": [
-        "*://*/*"
+        "*://*/*",
+        "bookmarks"
     ],
     "background": {
         "scripts": ["bower_components/angular/angular.min.js"]
