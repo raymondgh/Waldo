@@ -3,15 +3,15 @@ var app = angular.module('Waldo', []);
 app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLService) {
     $scope.test = "Hello World";
     $scope.currentUrl = "";
-    chrome.tabs.getSelected(windowId, function(tab) {
-        console.log("current:"+tab.url);
-        $scope.currentUrl = tab.url;
-    });
+    // chrome.tabs.getSelected(windowId, function(tab) {
+    //     console.log("current:"+tab.url);
+    //     $scope.currentUrl = tab.url;
+    // });
 
     $scope.findSimilar = function() {
         var testURL = "http://automatic.com";
         var indexName =  "news_eng";
-        IDOLService.findSimilar($scope.currentUrl, indexName);
+        IDOLService.findSimilar($scope.currentUrl, indexName)
 
         .success(function(res) {
             console.log("Success: finding similar of URL " + $scope.currentUrl + " in index " + indexName + ". " );
@@ -21,7 +21,7 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLServi
 
     $scope.createIndex = function() {
         var indexName =  "news_eng";
-        IDOLService.createIndex(indexName);
+        IDOLService.createIndex(indexName)
 
         .success(function(res) {
             console.log("Success: connecting to Create Text Index API : " + indexName + ". ");
@@ -31,7 +31,7 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLServi
 
     $scope.addIndex = function() {
         var indexName =  "news_eng";
-        IDOLService.addIndex($scope.currentUrl, indexName);
+        IDOLService.addIndex($scope.currentUrl, indexName)
 
         .success(function(res) {
             console.log("Success: connecting to Add to Text Index API : " + indexName + " with URL : " + $scope.currentUrl);
