@@ -133,5 +133,5 @@ text-decoration: none;\
 font-family:Arial,"Times New Roman",Georgia,Serif;\
 }\
   </style>                \
-      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:30px;font-family: museo slab; color: white;"><img src="http://auditure.parseapp.com/waldo/global.png" style="width: 40px; margin-right: 5px; margin-bottom: 10px"/><img src="http://auditure.parseapp.com/waldo/friends.png" style="width: 40px;margin-right: 5px;  margin-bottom: 10px"/><img src="http://auditure.parseapp.com/waldo/personal.png" style="width: 40px;  margin-bottom: 10px; margin-right: 5px;"/><br/>WALDO</div>';
+      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:30px;font-family: museo slab; color: white;"><img src="http://auditure.parseapp.com/waldo/global-w.png" style="width: 40px; margin-right: 5px; margin-bottom: 10px"/><img src="http://auditure.parseapp.com/waldo/friends.png" style="width: 40px;margin-right: 5px;  margin-bottom: 10px"/><img src="http://auditure.parseapp.com/waldo/personal.png" style="width: 40px;  margin-bottom: 10px; margin-right: 5px;"/><br/>WALDO</div>';
 }
