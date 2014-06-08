@@ -1,12 +1,17 @@
 var app = angular.module('Waldo', []);
 
-app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLService) {
+app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function($scope, IDOLService, ChromeService) {
     $scope.test = "Hello World";
     $scope.currentUrl = "";
-    // chrome.tabs.getSelected(windowId, function(tab) {
-    //     console.log("current:"+tab.url);
-    //     $scope.currentUrl = tab.url;
-    // });
+
+    $scope.testButton = function() {
+        chrome.tabs.getSelected(null, function(tab) {
+            $scope.$apply(function() {
+                $scope.test = tab.url;s
+            });
+        });
+
+    };
 
     $scope.findSimilar = function() {
         var testURL = "http://automatic.com";
@@ -40,6 +45,19 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', function($scope, IDOLServi
     };
 
 }]);
+
+app.factory('ChromeService', function() {
+
+    var service = {};
+
+    service.tryLog = function() {
+        chrome.tabs.getSelected(windowId, function(tab) {
+            alert("current:"+tab.url);
+        });
+    };
+
+    return service;
+});
 
 app.factory('IDOLService', function($http) {
 

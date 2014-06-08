@@ -5,7 +5,8 @@
 	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
     "permissions": [
         "*://*/*",
-        "bookmarks"
+        "bookmarks",
+        "tabs"
     ],
     "background": {
         "scripts": ["bower_components/angular/angular.min.js"]
