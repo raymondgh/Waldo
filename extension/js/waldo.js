@@ -3,29 +3,65 @@ var app = angular.module('Waldo', []);
 app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function($scope, IDOLService, ChromeService) {
     $scope.test = "Hello World";
     $scope.currentUrl = "";
+    $scope.bookmarksList = [];
+    $scope.bmList = [];
 
-    $scope.testButton = function() {
-        chrome.tabs.getSelected(null, function(tab) {
-            $scope.$apply(function() {
-                $scope.test = tab.url;s
+
+    
+        
+
+
+    function processNode(node) {
+        var bookmarks =  [] ;
+
+        if(node.children) {
+            node.children.forEach(function(child) { 
+                bookmarks = bookmarks.concat(processNode(child)); 
             });
-        });
+        } else {
+            addIndex(node.url, indexName);
+            bookmarks.push(node.url);   
+        }
 
+        return bookmarks;
+    }
+
+    function getBookmarks() {
+        // var list = ChromeService.getBookmarks();
+        var list = [];
+        chrome.bookmarks.getTree(function(itemTree){
+            itemTree.forEach(function(item){
+                list = list.concat(processNode(item));
+            });
+        });        
     };
 
-    $scope.findSimilar = function() {
-        var testURL = "http://automatic.com";
-        var indexName =  "news_eng";
+    function findSimilar(indexName) {
+        // var testURL = "http://automatic.com";
+        // var indexName =  "news_eng";
         IDOLService.findSimilar($scope.currentUrl, indexName)
 
         .success(function(res) {
             console.log("Success: finding similar of URL " + $scope.currentUrl + " in index " + indexName + ". " );
             console.log(res);
+             $scope.$apply(function() {
+                $scope.bmList = res;
+
+            });
+                             $scope.bmList = res;
+
+        })
+        .error(function(err) {
+            $scope.$apply(function() {
+                $scope.bmList = err;
+            });
+                            $scope.bmList = err;
+
         });
     };
 
-    $scope.createIndex = function() {
-        var indexName =  "news_eng";
+    function createIndex(indexName) {
+        // indexName =  "news_eng";
         IDOLService.createIndex(indexName)
 
         .success(function(res) {
@@ -34,15 +70,53 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
         });
     };
 
-    $scope.addIndex = function() {
-        var indexName =  "news_eng";
-        IDOLService.addIndex($scope.currentUrl, indexName)
-
+    function addIndex(url, indexName) {
+        // var indexName =  "news_eng";
+        IDOLService.addIndex(url, indexName)
         .success(function(res) {
-            console.log("Success: connecting to Add to Text Index API : " + indexName + " with URL : " + $scope.currentUrl);
+            console.log("Success: connecting to Add to Text Index API : " + indexName + " with URL : " + url);
             console.log(res);
         });
-    };
+    }
+
+
+    var indexName = "Waldo";
+
+    if (typeof(Storage) != "undefined") {
+        // Store
+        localStorage.setItem("lastname", "HTML 5 Supported");
+        // Retrieve
+        $scope.result = localStorage.getItem("lastname");
+    } else {
+        $scope.result = "Sorry, your browser does not support Web Storage...";
+    }
+
+    chrome.tabs.getSelected(null, function(tab) {
+        // $scope.$apply(function() {
+            $scope.currentUrl = tab.url;
+
+        // });
+          
+
+
+            var createdIndex = localStorage.getItem("createdIndex");
+            $scope.result = createdIndex;
+            // createdIndex = false;
+            // localStorage.setItem("createdIndex", false);    
+
+            if ( !createdIndex ) {
+                localStorage.setItem("createdIndex", true);    
+                createIndex(indexName);
+                getBookmarks();
+                $scope.gotBookmark = "true";
+            }
+
+            indexName = "news_eng";
+            $scope.findingSim = "Finding Similar";
+            findSimilar(indexName);
+
+    });
+
 
 }]);
 
@@ -50,9 +124,28 @@ app.factory('ChromeService', function() {
 
     var service = {};
 
-    service.tryLog = function() {
-        chrome.tabs.getSelected(windowId, function(tab) {
-            alert("current:"+tab.url);
+
+    service.processNode = function (node) {
+        var bookmarks = [];
+        if(node.children) {
+            node.children.forEach(function(child) { 
+                bookmarks.concat(processNode(child)); 
+            });
+        } else {
+            bookmarks.push(node.url);   
+        }
+
+        return bookmarks;
+    };
+
+    service.getBookmarks = function() {
+        chrome.bookmarks.getTree(function(itemTree){
+            // itemTree.forEach(function(item){
+            //     bookmarkList.concat(processNode(item));
+            //     alert(bookmarkList);
+            // });
+
+            return itemTree;
         });
     };
 
@@ -69,6 +162,7 @@ app.factory('IDOLService', function($http) {
             addIndex: "https://api.idolondemand.com/1/api/sync/addtotextindex/v1?"
         };
 
+
     service.findSimilar = function(url, indexName) {
 
         var apiRequest = api.findSimilar
@@ -77,6 +171,7 @@ app.factory('IDOLService', function($http) {
             .concat("&indexes=").concat(indexName);
 
         console.log("Find Similar Request: " + apiRequest);
+
         return $http.get(apiRequest);
     };
 
