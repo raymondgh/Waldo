@@ -82,11 +82,11 @@ html.append(
   </style>                \
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>\
 <div id="sidebarExpander"  onclick="$(\'#waldoSidebar\').width() ? $(\'#waldoSidebar\').css(\'width\', \'0px\') : $(\'#waldoSidebar\').css(\'width\', \'20%\');$(\'#waldoSidebar\').width() ? $(\'#sidebarExpander\').css(\'width\', \'22%\') : $(\'#sidebarExpander\').css(\'width\', \'20px\');localStorage.waldoSidebar = $(\'#waldoSidebar\').width();" style="background-color:#009DDC;position: fixed; width: 22%;border:none;z-index: 2147483647; top: 0px;' +
-           'height: ' + height + ';right: 0px;filter:alpha(opacity=50);opacity: 0.50;"></div>\
+           'height: ' + height + ';right: 0px;filter:alpha(opacity=50);opacity: 0.50; transition: .6s; -webkit-transition: .6s;"></div>\
 <script>localStorage.waldoSidebar != 0 ? $(\'#waldoSidebar\').css(\'width\', \'20%\') : $(\'#waldoSidebar\').css(\'width\', \'0px\');localStorage.waldoSidebar != 0 ? $(\'#sidebarExpander\').css(\'width\', \'22%\') : $(\'#sidebarExpander\').css(\'width\', \'20px\');</script>\
   <iframe id="' + iframeId + '" scrolling="no" frameborder="0" allowtransparency="true" ' +
     'style="background-color:#009DDC;position: fixed; width: 20%;border:none;z-index: 2147483647; top: 0px;' +
-           'height: ' + height + ';right: 0px;filter:alpha(opacity=80);opacity: 0.8;">' +
+           'height: ' + height + ';right: 0px;filter:alpha(opacity=80);opacity: 0.8; ">' +
   '</iframe>'
 );
 
@@ -106,8 +106,8 @@ function InjectSimilarStuff(results) {
     var documents = results.documents;
     var docList = "";
     function printDocs(element, index, array) {
-        docList = docList + '<a target="_top" href="' + element.reference + '" style="font-size: 16px;">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
-        var kw = "<p style='font-size: 11px; margin-top: 3px;'>" ;
+        docList = docList + '<a target="_top" href="' + element.reference + '" style="font-size: 16px; font-family: museo slab;" target="_blank">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
+        var kw = "<p style='font-size: 13px; margin-top: 3px; font-family: museo slab;'>" ;
         function parseLinks(element2, index2, array2) {
             kw += element2.toLowerCase();
             if (index2 < array2.length-1) kw += ', ';
@@ -133,5 +133,5 @@ text-decoration: none;\
 font-family:Arial,"Times New Roman",Georgia,Serif;\
 }\
   </style>                \
-      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:30px; color: white;">WALDO</div>';
+      ' + docList + '<div style="bottom:0;text-align:center;position:absolute;width:100%;font-size:30px;font-family: museo slab; color: white;"><img src="http://auditure.parseapp.com/waldo/global.png" style="width: 40px; margin-right: 5px; margin-bottom: 10px"/><img src="http://auditure.parseapp.com/waldo/friends.png" style="width: 40px;margin-right: 5px;  margin-bottom: 10px"/><img src="http://auditure.parseapp.com/waldo/personal.png" style="width: 40px;  margin-bottom: 10px; margin-right: 5px;"/><br/>WALDO</div>';
 }

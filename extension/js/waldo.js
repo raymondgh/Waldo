@@ -171,7 +171,7 @@ app.factory('IDOLService', function($http) {
         var apiRequest = api.findSimilar
             .concat("&apiKey=").concat(api.key)
             .concat("&url=").concat(url)
-            .concat("&indexes=").concat(indexName);
+            .concat("&indexes=").concat(indexName).concat("&max_results=4");
 
         console.log("Find Similar Request: " + apiRequest);
 
