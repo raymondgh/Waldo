@@ -1,9 +1,30 @@
 <html ng-app="Waldo" ng-csp>
     <body ng-controller="ChromeTab">
 
-        <button ng-click="testButton()">Try</button>
-        <b>{{test}}</b>
+        <!-- <button ng-click="testButton()">URL</button>
+        <b>{{currentUrl}}</b> -->
+      
+     <!--    <button ng-click="getBookmarks()">Bookmarks</button><br/>
+        <ul>
+        	<li ng-repeat="b in bookmarksList">
+        		{{ b }}
+        	</li>
+       	</ul> -->
+       	<b>{{ result }}</b>
+       	<b>{{ apiRequest }}</b>
+       	<b>{{ currentUrl }}</b>
+       	<b>{{ gotBookmark }}</b>
+       	<b>{{ findingSim }}</b>
+       	  <!-- <b>{{bookmarksList}}</b> -->
+        <!-- <button ng-click="findSimilar()">Find Similar</button><br/> -->
+
+   	  	<div id="bmList">
+   	  		{{ bmList }}
+	  	</div>
         <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
         <script src="js/waldo.js"></script>
     </body>
 </html>

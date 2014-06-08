@@ -13,14 +13,14 @@ function processNode(node) {
 }
 
 function getbookmarks() {
-	var bookmarks = [];
+	var bookmarkList = [];
 	chrome.bookmarks.getTree(function(itemTree){
 		itemTree.forEach(function(item){
-			bookmarks.concat(processNode(item));
-			console.log(bookmarks);
+			bookmarkList.concat(processNode(item));
+			console.log(bookmarkList);
 		});
 
-		return bookmarks;
+		return bookmarkList;
 	});
 	
 }
