@@ -4,7 +4,8 @@
 	"version": "1.0",
 	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
     "permissions": [
-        "https://api.idolondemand.com/"
+        "https://api.idolondemand.com/",
+		"https://www.idolondemand.com/*",
         "bookmarks"
     ],
     "background": {
@@ -13,5 +14,14 @@
     "browser_action": {
         "default_popup": "extension/index.html"
     },
-    "content_security_policy": "script-src 'self'; object-src 'self'"
+    "content_security_policy": "script-src 'self'; object-src 'self'",
+	"content_scripts": 
+	[
+		{
+			"matches": ["*://*/*"],
+			"js": ["bower_components/jquery/dist/jquery.min.js","extension/keys.js","extension/main.js"],
+			"run_at": "document_end"
+		}
+	],
+	"web_accessible_resources": ["bower_components/jquery/dist/jquery.min.map"]
 }
