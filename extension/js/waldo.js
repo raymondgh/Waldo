@@ -6,11 +6,6 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
     $scope.bookmarksList = [];
     $scope.bmList = [];
 
-
-    
-        
-
-
     function processNode(node) {
         var bookmarks =  [] ;
 
@@ -37,6 +32,7 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
     };
 
     function findSimilar(indexName) {
+        
         // var testURL = "http://automatic.com";
         // var indexName =  "news_eng";
         IDOLService.findSimilar($scope.currentUrl, indexName)
@@ -49,7 +45,7 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
 
             });
                              $scope.bmList = res;
-
+                             chrome.tabs.executeScript(null, { code: "InjectSimilarStuff("+JSON.stringify(res)+");" });
         })
         .error(function(err) {
             $scope.$apply(function() {
@@ -117,22 +113,6 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
 
     });
 
-
-    //test -harvey
-    $scope.recommendations = [
-    {
-        'name': 'Nexus S',
-        'snippet': 'Fast just got faster with Nexus S.'
-    },
-    {
-        'name': 'Motorola XOOM with Wi-Fi',
-        'snippet': 'The Next, Next Generation tablet.'
-    },
-    {
-        'name': 'MOTOROLA XOOM',
-        'snippet': 'The Next, Next Generation tablet.'
-    }
-    ];
 }]);
 
 app.factory('ChromeService', function() {

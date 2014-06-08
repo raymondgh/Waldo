@@ -13,15 +13,15 @@ var textIndexKey = 'news_eng';
 //}
 //createTestIndex();
 
-function addBookmarkToIndex() {
-    $.ajax({
-        url: uri,
-        type: "GET",
-        crossDomain: true,
-    }).done(function (msg) {
-        console.log(msg);
-    });
-}
+//function addBookmarkToIndex() {
+//    $.ajax({
+//        url: uri,
+//        type: "GET",
+//        crossDomain: true,
+//    }).done(function (msg) {
+//        console.log(msg);
+//    });
+//}
 
 //height of top bar, or width in your case
 var height = '100%';
@@ -91,10 +91,43 @@ document.getElementById(iframeId).contentDocument.body.innerHTML =
       width: 100%;        \
       z-index: 2147483647;\
     }                     \
-}\
   </style>                \
       Page Title\
       <p>Page Snippet</p>';
 
-//var bck = chrome.extension.getBackgroundPage();
-//console.log(bck);
+var similarStuff = {};
+
+function InjectSimilarStuff(results) {
+    
+    var documents = results.documents;
+    var docList = "";
+    function printDocs(element, index, array) {
+        docList = docList + '<a href="' + element.reference + '">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
+        function parseLinks(element2, index2, array2) {
+            docList = docList + element2.toLowerCase();
+            if (index2 < array2.length-1) docList = docList + ', ';
+        }
+        var links = element.links;//.foreach(parseLinks);
+        links.forEach(parseLinks);
+        docList = docList + '</br></br>';
+    }
+    documents.forEach(printDocs); //TODO: make this more conservative on parse api calls
+
+    document.getElementById(iframeId).contentDocument.body.innerHTML =
+  '<style type="text/css">\
+    html, body {          \
+      height: '+ height + '; \
+      width: 100%;        \
+      z-index: 2147483647;\
+      font-size:smaller;\
+    }                     \
+a {\
+font-size:small;\
+color: #FFFFFF;\
+text-decoration: none;\
+font-family:Arial,"Times New Roman",Georgia,Serif;\
+}\
+  </style>                \
+<div></div>\
+      ' + docList + '';
+}
