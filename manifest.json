@@ -4,9 +4,9 @@
 	"version": "1.0",
 	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
     "permissions": [
-        "https://api.idolondemand.com/",
-		"https://www.idolondemand.com/*",
-        "bookmarks"
+        "*://*/*",
+        "bookmarks",
+        "tabs"
     ],
     "background": {
         "scripts": ["bower_components/angular/angular.min.js"]
