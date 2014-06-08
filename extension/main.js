@@ -106,7 +106,7 @@ function InjectSimilarStuff(results) {
     var documents = results.documents;
     var docList = "";
     function printDocs(element, index, array) {
-        docList = docList + '<a href="' + element.reference + '">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
+        docList = docList + '<a target="_top" href="' + element.reference + '">' + element.title + '</a></br>';// + JSON.stringify(element.links) + '</br></br>';
         function parseLinks(element2, index2, array2) {
             docList = docList + element2.toLowerCase();
             if (index2 < array2.length-1) docList = docList + ', ';
