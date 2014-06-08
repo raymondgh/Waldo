@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Waldo",
-	"version": "1.0",
+	"version": "0.0.1",
 	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
     "permissions": [
         "*://*/*",
