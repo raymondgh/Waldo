@@ -4,7 +4,7 @@
 	"version": "1.0",
 	"description": "Automatically recommend similar bookmarks using IDOL OnDemand",
     "permissions": [
-        "https://api.idolondemand.com/"
+        "https://api.idolondemand.com/",
         "bookmarks"
     ],
     "background": {
