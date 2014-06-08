@@ -27,6 +27,14 @@
 	"web_accessible_resources": [
 		"bower_components/jquery/dist/jquery.min.map",
 		"extension/resources/global.png"],
+	"browser_action": {
+      "default_icon": {                    // optional
+		"19": "images/icon16.png",
+    	"38": "images/icon48.png"
+      }
+      // "default_title": "Waldo"     // optional; shown in tooltip
+      // "default_popup": "extension/index.html" 
+    },
 	"icons": { 
 		"16": "images/icon16.png",
     	"48": "images/icon48.png",

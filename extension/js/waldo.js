@@ -97,28 +97,24 @@ app.controller('ChromeTab', ['$scope', 'IDOLService', 'ChromeService', function(
 
     chrome.tabs.getSelected(null, function(tab) {
         // $scope.$apply(function() {
-    $scope.currentUrl = tab.url; //pageuri;
-
-        // });
-          
+    $scope.currentUrl = tab.url; //pageuri;          
 
 
-            var createdIndex = localStorage.getItem("createdIndex");
-            $scope.result = createdIndex;
-            // createdIndex = false;
-            // localStorage.setItem("createdIndex", false);    
+    var createdIndex = localStorage.getItem("createdIndex");
+    $scope.result = createdIndex;
+    createdIndex = false;
+    // localStorage.setItem("createdIndex", false);    
 
-            if ( !createdIndex ) {
-                localStorage.setItem("createdIndex", true);    
-                createIndex(indexName);
-                getBookmarks();
-                $scope.gotBookmark = "true";
-            }
+    if ( !createdIndex ) {
+        localStorage.setItem("createdIndex", true);    
+        // createIndex(indexName);
+        getBookmarks();
+        $scope.gotBookmark = "true";
+    }
 
-            indexName = "news_eng";
-            $scope.findingSim = "Finding Similar";
-            findSimilar(indexName);
-
+    // indexName = "news_eng";
+    $scope.findingSim = "Finding Similar";
+        findSimilar(indexName);
     });
 
 }]);
@@ -179,7 +175,7 @@ app.factory('IDOLService', function($http) {
     };
 
     service.createIndex = function (indexName) {
-        var apiRequest = api.findSimilar
+        var apiRequest = api.createIndex
             .concat("&apiKey=").concat(api.key)
             .concat("&flavor=explorer")
             .concat("&index=").concat(indexName);
@@ -190,7 +186,7 @@ app.factory('IDOLService', function($http) {
     };
 
     service.addIndex = function (url, indexName) {
-        var apiRequest = api.findSimilar
+        var apiRequest = api.addIndex
             .concat("&apiKey=").concat(api.key)
             .concat("&url=").concat(url)
             .concat("&index=").concat(indexName);

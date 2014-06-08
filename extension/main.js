@@ -86,7 +86,7 @@ html.append(
 <script>localStorage.waldoSidebar != 0 ? $(\'#waldoSidebar\').css(\'width\', \'20%\') : $(\'#waldoSidebar\').css(\'width\', \'0px\');localStorage.waldoSidebar != 0 ? $(\'#sidebarExpander\').css(\'width\', \'22%\') : $(\'#sidebarExpander\').css(\'width\', \'20px\');</script>\
   <iframe id="' + iframeId + '" scrolling="no" frameborder="0" allowtransparency="true" ' +
     'style="background-color:#009DDC;position: fixed; width: 20%;border:none;z-index: 2147483647; top: 0px;' +
-           'height: ' + height + ';right: 0px;filter:alpha(opacity=80);opacity: 0.8; ">' +
+           'height: ' + height + ';right: 0px;filter:alpha(opacity=90);opacity: 0.9; ">' +
   '</iframe>'
 );
 
